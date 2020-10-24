@@ -36,8 +36,7 @@ gem 'simple_command'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-# Use Faker
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
 
 #use serialize
 gem 'active_model_serializers'
@@ -45,6 +44,11 @@ gem 'active_model_serializers'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.1'
+  # Use Faker
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
 end
 
 group :development do

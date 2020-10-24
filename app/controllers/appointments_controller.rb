@@ -8,10 +8,10 @@ class AppointmentsController < ApplicationController
     @start_at = seconds_since_midnight(Time.parse(params[:start_at]).strftime("%H : %M"))
     @doctor_schedule_start = seconds_since_midnight(@doctor_schedule.start_at.strftime("%H : %M"))
 
-    @count = Appointment.where(id_doctor_schedule: params[:id_doctor_schedule]).count
-    
+    @count = Appointment.where(id_doctor_schedule: params[:id_doctor_schedule] , created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
+
     if (@doctor_schedule_start - @start_at + (30 * 60) > 0 && @count < 10 && !@already_appointment)
-      @already_appointment = Appointment.where(id_doctor_schedule: params[:id_doctor_schedule], id_user: @current_user.id).first
+      @already_appointment = Appointment.where(id_doctor_schedule: params[:id_doctor_schedule], id_user: @current_user.id , created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).first
       if (@already_appointment.nil?)
         @appointment = Appointment.create(id_doctor_schedule: params[:id_doctor_schedule],
                                           id_user: @current_user.id,
