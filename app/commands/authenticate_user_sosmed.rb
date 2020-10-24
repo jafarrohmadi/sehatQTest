@@ -14,9 +14,9 @@ class AuthenticateUserSosmed
   attr_accessor :email, :provider_id, :provider_type
 
   def user
-    user = User.find_by email :email, provider_id :provider_id, provider_type :provider_type
+    user = User.where('email  = ? AND provider_id = ? AND  provider_type = ?', email, provider_id, provider_type).first
 
-    return user if user && user.authenticate(user.email + user.name)
+    return user if user
 
     errors.add :user_authentication, 'invalid credentials' && nil
   end
